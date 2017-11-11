@@ -1,2 +1,2 @@
-# BurriposterStore
-Web desarrollada con Vue.js y la API de imgur
+# Burriposter Store
+Web desarrollada con Vue.js haciendo llamadas a la API de imgur.
