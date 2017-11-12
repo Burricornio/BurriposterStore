@@ -42,7 +42,9 @@
                 </div>
             </div>
             <!--Utilizamos este div para detectar el botttom de la lista de productos y e implementar el scroll load-->
-            <div id="product-list-bottom"></div>
+            <div id="product-list-bottom">
+                <div v-if="items.length === results.length && results.length > 100">No more items.</div>
+            </div>
         </div>
         <div class="cart">
             <h2>Shopping Cart</h2>
