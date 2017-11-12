@@ -27,7 +27,7 @@
         <div class="products">
             <div v-if="loading">Loading...</div>
             <div class="search-results" v-else>
-                Found {{ items.length }} results for search term {{ lastSearch }}
+                Found {{ results.length }} results for search term {{ lastSearch }}
             </div>
             <div class="product" v-for="(item, index) in items">
                 <div>
@@ -41,6 +41,8 @@
                     <button v-on:click="addItem(index)" class="add-to-cart btn">Add to cart</button>
                 </div>
             </div>
+            <!--Utilizamos este div para detectar el botttom de la lista de productos y e implementar el scroll load-->
+            <div id="product-list-bottom"></div>
         </div>
         <div class="cart">
             <h2>Shopping Cart</h2>
@@ -70,6 +72,8 @@
 <script src="reload/reload.js"></script>
 <script src="./node_modules/vue/dist/vue.js"></script>
 <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+<!--Librería para implementar el 'scroll load'-->
+<script src="./node_modules/scrollmonitor/scrollMonitor.js"></script>
 <script type="text/javascript" src="public/script.js"></script>
 
 </body>

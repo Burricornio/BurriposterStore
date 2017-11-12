@@ -1,17 +1,25 @@
 const PRICE = 9.99;
+const LOAD_NUM = 10;
 
 new Vue({ // Creamos una instancia de Vue.
     el: '#app', // Donde queremos instanciar nuestra aplicación en el DOM.
     data: { // Propiedades  accsesibles desde el DOM con interpolaciones.
         total: 0,
-        items: [],
+        items: [], // Variable para almacenar un número de items concreto para implementar el hacer'scroll load'
         cart: [],
+        results: [], // Variable para almacenar todos los resultados
         newSearch: 'anime',
         lastSearch:'',
         loading: false,
         price: PRICE
     },
     methods: {
+        appendItems: function() {
+            if(this.items.length < this.results.length) {
+                let append = this.results.slice(this.items.length, this.items.length + LOAD_NUM); // De esta forma obtenemos sólo los diez primeros resultados
+                this.items = this.items.concat(append);
+            }
+        },
         onSubmit: function(event) {
             this.items = [];
             this.loading = true;
@@ -19,7 +27,8 @@ new Vue({ // Creamos una instancia de Vue.
             .get('/search/'.concat(this.newSearch))
             .then(function(res) {
                 this.lastSearch = this.newSearch;
-                this.items = res.data;
+                this.results = res.data; // Almacenamos todos los resultados
+                this.appendItems();
                 this.loading = false;
             })
         },
@@ -67,5 +76,19 @@ new Vue({ // Creamos una instancia de Vue.
     },
     mounted: function() {
         this.onSubmit();
+
+        // Pasos  para implementar 'scroll load' a traves de la librería scrollMonitor
+        // Vamos a llamar al 'this' con ES5. Podríamos haber implementado una 'arrow function' de ES6
+        let vueInstance = this;
+        // Almacenamos en una variableel elemento que queremos observar
+        let elem = document.getElementById('product-list-bottom');
+        //Creamos el observador
+        let watcher = scrollMonitor.create(elem);
+        // Observamos si aparece en el viewport
+        watcher.enterViewport(function() {
+            vueInstance.appendItems()
+        })
     }
 });
+
+
