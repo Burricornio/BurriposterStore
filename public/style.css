@@ -22,6 +22,7 @@ button:focus, input:focus {
     opacity: 0.8;
 }
 
+/* Utilizamos este selector para esperar a que se cargue todo antes de pintar la app en pantalla*/
 [v-cloak] {
     display: none !important;
 }

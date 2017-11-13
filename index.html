@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="public/style.css">
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     <div class="header">
         <h1>BurriPoster Store</h1>
         <form class="searchbar" v-on:submit.prevent="onSubmit">
@@ -41,7 +41,7 @@
                     <button v-on:click="addItem(index)" class="add-to-cart btn">Add to cart</button>
                 </div>
             </div>
-            <!--Utilizamos este div para detectar el botttom de la lista de productos y e implementar el scroll load-->
+            <!--Utilizamos este div para detectar el bottom de la lista de productos y e implementar el scroll load-->
             <div id="product-list-bottom">
                 <div v-if="noMoreItems">No more items.</div>
             </div>
