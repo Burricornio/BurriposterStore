@@ -13,6 +13,13 @@ new Vue({ // Creamos una instancia de Vue.
         loading: false,
         price: PRICE
     },
+    computed: { // Son observadores de determinados eventos. La pagina se recarga al haber algun cambio. Es enesta cose estamos observandolos items 
+                // para mostrar el mensaje 'no more items' al final del scroll.
+        noMoreItems: function() {
+            return this.items.length === this.results.length && this.results.length > 100;
+        },
+   
+    },
     methods: {
         appendItems: function() {
             if(this.items.length < this.results.length) {
