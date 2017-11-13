@@ -27,16 +27,19 @@ new Vue({ // Creamos una instancia de Vue.
             }
         },
         onSubmit: function(event) {
-            this.items = [];
-            this.loading = true;
-            this.$http
-            .get('/search/'.concat(this.newSearch))
-            .then(function(res) {
-                this.lastSearch = this.newSearch;
-                this.results = res.data; // Almacenamos todos los resultados
-                this.appendItems();
-                this.loading = false;
-            })
+            // Comprobamos que haya algo escrito en el campo de busqueda
+            if(this.newSearch.length > 0) {
+                this.items = [];
+                this.loading = true;
+                this.$http
+                .get('/search/'.concat(this.newSearch))
+                .then(function(res) {
+                    this.lastSearch = this.newSearch;
+                    this.results = res.data; // Almacenamos todos los resultados
+                    this.appendItems();
+                    this.loading = false;
+                })
+            }  
         },
         addItem: function(index) {
             this.total += PRICE;
